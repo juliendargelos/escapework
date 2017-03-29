@@ -48,6 +48,9 @@ group :development, :test do
   gem 'figaro'
   # Database fixtures
   gem 'faker'
+
+  # favicon
+  gem 'rails_real_favicon'
 end
 
 group :development do
