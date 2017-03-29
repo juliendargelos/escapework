@@ -56,7 +56,7 @@ body > header
 			align-items: center
 			flex-direction: column
 			justify-content: center
-			+prefix(backdrop-filter, blur(20px))
+			transform: scale(0)
 			a.button
 				margin: 0 0 15px 0
 				&:last-of-type
@@ -82,30 +82,31 @@ body > header
 						transform: scale(0)
 			&[data-close]
 				transform: scale(0)
-				animation: 0.4s 1 nav-out
+				animation: 0.6s 1 nav-out
 		.nav
 			display: block
 
 @keyframes nav-in
 	0%
+		+prefix(backdrop-filter, blur(0))
 		opacity: 0
-		//+prefix(filter, blur(20px))
 		transform: scale(1.5)
 	100%
+		+prefix(backdrop-filter, blur(20px))
 		opacity: 1
-		//+prefix(filter, blur(0px))
 		transform: scale(1)
 
 @keyframes nav-out
 	0%
+		+prefix(backdrop-filter, blur(20px))
 		opacity: 1
 		display: flex
-		//+prefix(filter, blur(0))
 		transform: scale(1)
-	60%
+	45%
+		+prefix(backdrop-filter, blur(0))
 		opacity: 0
 	100%
+		+prefix(backdrop-filter, blur(0))
 		opacity: 0
 		display: flex
-		//+prefix(filter, blur(20px))
 		transform: scale(1.5)
