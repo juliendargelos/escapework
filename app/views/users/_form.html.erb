@@ -4,7 +4,6 @@
 	<%= f.field :password_confirmation, input: :password_field %>
     <%= f.field :firstname, input: :text_field %>
     <%= f.field :lastname, input: :text_field %>
-    <%= f.field :admin, input: :check_box %>
     <div class="actions">
 		<% unless action_is?(:edit, :update) %>
 			<%= link_to 'Login', new_session_path %>
@@ -12,4 +11,3 @@
         <%= f.submit action_is?(:new, :create) ? 'Signup' : 'Update' %>
     </div>
 <% end %>
-
