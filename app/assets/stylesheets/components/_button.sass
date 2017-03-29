@@ -9,26 +9,31 @@
 	letter-spacing: 2px
 	border: 1px solid $white
 	border-radius: 20px
-	display: inline-block
+	outline: none
 	cursor: pointer
-	height: 28px
+	display: inline-block
+	height: 30px
 	line-height: 28px
+	box-sizing: border-box
 	transition: 0.2s
 	text-decoration: none
 	+prefix(appearance, none)
-	&.clear
-		border-color: transparent
-	&.plain, &:hover:not(.disabled), &:active:not(.disabled)
+	&.plain, &:hover:not(.disabled):not(:focus), &:active:not(.disabled):not(:focus)
 		background: map-get($button-default, color)
 		border-color: map-get($button-default, color)
 		color: map-get($button-hover, map-get($button-default, color))
-	&:active:not(.disabled)
+	&:active:not(.disabled):not(:focus)
 		transition: 0.05s
 		transform: scale(0.95)
+	&:focus
+		transform: scale(1.1)
+		transition: 0.1s
 	@each $name, $color in $button-colors
 		&.#{$name}
 			+button($name)
 	+default($button-default)
+	&.clear:not(:focus)
+		border-color: transparent
 	&[disabled], &.disabled
 		opacity: 0.5
 		cursor: default

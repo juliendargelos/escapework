@@ -2,9 +2,11 @@
 	background-position: center center
 	background-size: contain
 	margin: 0
+	outline: none
 	display: block
 	font-size: 0
 	color: transparent
+	transition: 0.2s
 	@each $name, $size in $logo-sizes
 		&.#{$name}
 			width: $size*$logo-ratio
@@ -15,3 +17,7 @@
 	&.inline
 		display: inline-block
 	+default($logo-default)
+	&:focus
+		outline: none
+		transform: scale(1.1)
+		transition: 0.1s

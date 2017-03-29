@@ -2,7 +2,7 @@
 	$color: map-get($button-colors, $name)
 	color: $color
 	border-color: $color
-	&.plain, &:hover:not(.disabled), &:active:not(.disabled)
+	&.plain, &:hover:not(.disabled):not(:focus), &:active:not(.disabled):not(:focus)
 		background: $color
 		border-color: $color
 		color: map-get($button-hover, $name)
