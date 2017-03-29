@@ -1,26 +1,26 @@
 class ErrorsController < ApplicationController
 	def http_404
 		@code = 404
-		@message = "The page you were looking for doesn't exist"
+		@message = "La page que vous recherchez n'existe pas"
 		http
 	end
 
 	def http_402
 		@code = 402
-		@message = "The change you wanted was rejected"
+		@message = "Les modifications que vous avez demandées ont été rejetées"
 		http
 	end
 
 	def http_500
 		@code = 500
-		@message = "We're sorry, but something went wrong"
+		@message = "Nous sommes désolés, mais quelque chose n'a pas fonctionné..."
 		http
 	end
 
 	def http
 		@http_error = true
-		@error = @code.nil? ? "Unknown error" : "Error #{@code}"
-		@message = "We're sorry, but something went wrong" if @message.nil?
+		@error = @code.nil? ? "Erreur inconnue" : "Erreur #{@code}"
+		@message = "Nous somme désolés, mais quelque chose n'a pas fonctionné" if @message.nil?
 
 		render 'http.html.erb'
 	end
