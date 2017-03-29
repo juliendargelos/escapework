@@ -1,0 +1,57 @@
+@import partials/main
+
+@import components/cover
+@import components/rowcols
+
+.introduction
+	+cols((default: 2, medium: 1))
+	.image
+		background: asset-url('introduction.jpg') no-repeat right center / cover
+		min-height: 200px
+	.description
+		background: $thin-grey
+		p
+			width: 100%
+			max-width: map-get($wrapper-sizes, normal)/2+$wrapper-padding*2
+			padding: 80px $wrapper-padding
+			box-sizing: border-box
+			font-size: 18px
+			color: $grey
+			line-height: 40px
+			em
+				+em-color(null, $light-grey)
+					margin-top: -6px
+.presentation
+	padding: 80px 0
+	h2
+		margin-bottom: 80px
+	.row
+		+cols((default: 3, medium: 1), 90px)
+		vertical-align: top
+	.col
+		text-align: center
+		.field
+			background-color: $brand
+			background-repeat: no-repeat
+			background-position: center center
+			background-size: auto 50px
+			width: 100px
+			height: 100px
+			margin: 0 auto 30px auto
+			border-radius: 100px
+			@each $field in escape, problem, timer
+				&.#{$field}
+					background-image: asset-url($field+'.svg')
+		h3, p
+			max-width: 330px
+			margin: 0 auto
+		h3
+			font-size: 16px
+			margin-bottom: 20px
+			line-height: 20px
+		p
+			color: $medium-grey
+			line-height: 20px
+		+max(medium)
+			&:not(:last-of-type)
+				margin-bottom: 60px

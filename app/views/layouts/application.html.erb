@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title><%= title base: 'Application' %></title>
+        <title><%= title base: 'Escape Work' %></title>
         <%= csrf_meta_tags %>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
@@ -11,6 +11,9 @@
 
     <body>
         <%= render 'flash' %>
+        <% if has_header? %>
+            <%= render 'header' %>
+        <% end %>
 
         <%= yield %>
 

@@ -4,6 +4,7 @@ module ApplicationHelper
 	@defer_routes = ''
 	@defer_translations = ''
 	@is_root = false
+	@has_header = true
 
 	def title content = nil
 		unless content.is_a?(String) || content.is_a?(Symbol)
@@ -32,6 +33,15 @@ module ApplicationHelper
 		else
 			@title = content.is_a?(Symbol) ? t(content, default: content.to_s.humanize) : content
 		end
+	end
+
+	def has_header v
+		@has_header = v ? true : false
+	end
+
+	def has_header?
+		@has_header = true if @has_header.nil?
+		@has_header
 	end
 
 	def is_root

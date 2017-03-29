@@ -37,3 +37,12 @@
 				&#{$s}
 					@content
 
+=em-color($color, $underline-color: null)
+	@if $underline-color == null
+		$underline-color: $color
+	@if $color != null
+		color: $color
+	&::after
+		@if $underline-color != null
+			background: $underline-color
+		@content

@@ -1,0 +1,17 @@
+.logo
+	background-position: center center
+	background-size: contain
+	margin: 0
+	display: block
+	font-size: 0
+	color: transparent
+	@each $name, $size in $logo-sizes
+		&.#{$name}
+			width: $size*$logo-ratio
+			height: $size
+	@each $name, $color in $logo-colors
+		&.#{$name}
+			background-image: asset-url('logo-'+$name+'.svg')
+	&.inline
+		display: inline-block
+	+default($logo-default)

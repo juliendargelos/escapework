@@ -1,0 +1,15 @@
+<header>
+	<div class="wrapper">
+		<h2>
+			<%= link_to 'Escape Work', root_path, class: 'logo small' %>
+		</h2>
+		<nav>
+			<% if current_user? %>
+				<%= link_to 'Déconnexion', destroy_session_path, class: 'button clear' %>
+			<% else %>
+				<%= link_to 'Connexion', new_session_path, class: 'button clear' %>
+				<%= link_to 'Inscription', new_user_path, class: 'button' %>
+			<% end %>
+		</nav>
+	</div>
+</header>

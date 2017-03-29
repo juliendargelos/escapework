@@ -1,0 +1,39 @@
+.button
+	background: transparent
+	margin: 0
+	padding: 0 15px
+	font-family: Helvetica
+	font-size: 10px
+	font-weight: $bold
+	text-transform: uppercase
+	letter-spacing: 2px
+	border: 1px solid $white
+	border-radius: 20px
+	display: inline-block
+	cursor: pointer
+	height: 28px
+	line-height: 28px
+	transition: 0.2s
+	text-decoration: none
+	+prefix(appearance, none)
+	&.clear
+		border-color: transparent
+	&.plain, &:hover:not(.disabled), &:active:not(.disabled)
+		background: map-get($button-default, color)
+		border-color: map-get($button-default, color)
+		color: map-get($button-hover, map-get($button-default, color))
+	&:active:not(.disabled)
+		transition: 0.05s
+		transform: scale(0.95)
+	@each $name, $color in $button-colors
+		&.#{$name}
+			color: $color
+			border-color: $color
+			&.plain, &:hover:not(.disabled), &:active:not(.disabled)
+				background: $color
+				border-color: $color
+				color: map-get($button-hover, $name)
+	+default($button-default)
+	&[disabled], &.disabled
+		opacity: 0.5
+		cursor: default
