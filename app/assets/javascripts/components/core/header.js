@@ -47,8 +47,7 @@ var header = {
 		},
 		init: function() {
 			if(this.element && this.toggler) {
-				this.toggler.on('mousedown', this.click);
-				this.toggler.on('touchstart', this.click);
+				this.toggler.on('touchdown', this.click);
 				window.on('resize', this.resize);
 			}
 		}
