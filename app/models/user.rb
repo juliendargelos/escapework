@@ -17,5 +17,5 @@ class User < ApplicationRecord
 	validates :password, presence: true, confirmation: true, length: { minimum: 6 }, on: :create
 	validates :firstname, presence: true
 	validates :lastname, presence: true
-	validates :admin, inclusion: { in: [ true, false ] }
+	validates :admin, boolean: true
 end
