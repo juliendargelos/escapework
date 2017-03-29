@@ -1,9 +1,15 @@
 <%= form_for user, url: action_is?(:new, :create) ? create_user_path : update_user_path do |f| %>
-	<%= f.field :email, input: :email_field %>
-	<%= f.field :password, input: :password_field %>
-	<%= f.field :password_confirmation, input: :password_field %>
-    <%= f.field :firstname, input: :text_field %>
-    <%= f.field :lastname, input: :text_field %>
+	<div class="row">
+		<div class="col">
+			<%= f.field :email, input: :email_field %>
+			<%= f.field :password, input: :password_field %>
+			<%= f.field :password_confirmation, input: :password_field %>
+		</div>
+		<div class="col">
+    		<%= f.field :firstname, input: :text_field %>
+    		<%= f.field :lastname, input: :text_field %>
+		</div>
+	</div>
     <div class="actions">
 		<% unless action_is?(:edit, :update) %>
 			<%= link_to 'Connexion', new_session_path, class: 'button dark clear' %>
