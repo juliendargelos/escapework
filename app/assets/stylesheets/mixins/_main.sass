@@ -1,0 +1,39 @@
+=default($defaults)
+	@each $n, $default in $defaults
+		@extend #{&}.#{$default}
+
+=prefix($property, $value)
+	@each $vendor in $vendors
+		-#{$vendor}-#{$property}: $value
+	#{$property}: $value
+
+=pseudo-prefix($selectors...)
+	@each $vendor in $vendors
+		$selector: ''
+		@each $s in $selectors
+			$selector: $selector+'&::-'+$vendor+'-'+$s+', '
+		#{str-slice($selector, 0, -3)}
+			@content
+	$selector: ''
+	@each $s in $selectors
+		$selector: $selector+'&::'+$s+', '
+	#{str-slice($selector, 0, -3)}
+		@content
+
+=extend-component($component, $options...)
+	$selector: ''
+
+	@extend .#{$component}
+	@each $option1 in $options
+		$s: '.'+$component+'.'+$option1
+		@extend #{$s} !optional
+		&#{$s}
+			@content
+		@each $option2 in $options
+			@if $option1 != $option2
+				$s: '.'+$component+'.'+$option1+'.'+$option2
+				$selector: $selector+$s+', '
+				@extend #{$s} !optional
+				&#{$s}
+					@content
+

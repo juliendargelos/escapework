@@ -1,0 +1,15 @@
+<%= form_for user, url: action_is?(:new, :create) ? create_user_path : update_user_path do |f| %>
+	<%= f.field :email, input: :email_field %>
+	<%= f.field :password, input: :password_field %>
+	<%= f.field :password_confirmation, input: :password_field %>
+    <%= f.field :firstname, input: :text_field %>
+    <%= f.field :lastname, input: :text_field %>
+    <%= f.field :admin, input: :check_box %>
+    <div class="actions">
+		<% unless action_is?(:edit, :update) %>
+			<%= link_to 'Login', new_session_path %>
+		<% end %>
+        <%= f.submit action_is?(:new, :create) ? 'Signup' : 'Update' %>
+    </div>
+<% end %>
+

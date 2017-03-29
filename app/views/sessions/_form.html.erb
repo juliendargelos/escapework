@@ -1,0 +1,9 @@
+<%= form_for user, url: create_session_path do |f| %>
+	<%= f.field :email, input: :email_field %>
+	<%= f.field :password, input: :password_field %>
+
+	<div class="actions">
+		<%= link_to 'Signup', new_user_path %>
+		<%= f.submit 'Login' %>
+	</div>
+<% end %>
