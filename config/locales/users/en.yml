@@ -1,0 +1,31 @@
+fr:
+  activerecord:
+    attributes:
+      user:
+        email: Email
+        password: Password
+        password_confirmation: Confirmation
+        firstname: First name
+        lastname: Last name
+        admin: Administrator
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: Please fill your email
+              email: Invalid email
+              taken: This email is already taken
+            password:
+              blank: Please fill your password
+              too_short:
+                one: Your password must have at least one character
+                other: Your password must have at least %{count} characters
+            password_confirmation:
+              confirmation: The confirmation doesn't match yout password
+            firstname:
+              blank: Please fill your first name
+            lastname:
+              blank: Please fill your last name
+            admin:
+                inclusion: Please provide a valid value

@@ -6,8 +6,8 @@
     <%= f.field :lastname, input: :text_field %>
     <div class="actions">
 		<% unless action_is?(:edit, :update) %>
-			<%= link_to 'Login', new_session_path, class: 'button dark clear' %>
+			<%= link_to 'Connexion', new_session_path, class: 'button dark clear' %>
 		<% end %>
-        <%= f.submit action_is?(:new, :create) ? 'Signup' : 'Update', class: 'button brand' %>
+        <%= f.submit action_is?(:new, :create) ? 'Inscription' : 'Update', class: 'button brand' %>
     </div>
 <% end %>

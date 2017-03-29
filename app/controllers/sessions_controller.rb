@@ -10,17 +10,17 @@ class SessionsController < ApplicationController
 
 	def create
 		if session_params[:email] == '' || session_params[:password] == ''
-			flash[:error] = 'Please enter your email and password'
+			flash[:error] = 'Veuillez indiquer votre adresse email et votre mot de passe'
 			redirect_to create_session_path
 		else
 			@user = User.find_by_email(session_params[:email])
 			if @user && @user.authenticate(session_params[:password])
 				session[:user_id] = @user.id
 				forgive_email
-				flash[:success] = 'Welcome!'
+				flash[:success] = 'Bienvenue '+@user.firstname+' !'
 				redirect_to root_path
 			else
-				flash[:error] = 'Wrong email or password'
+				flash[:error] = 'Adresse email ou mot de passe incorrect'
 				redirect_to create_session_path
 			end
 		end
@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
 
 	def destroy
 		session.delete :user_id
-		flash[:notice] = 'You have been logged out'
+		flash[:notice] = 'Vous avez été déconnecté'
 		redirect_to create_session_path
 	end
 
@@ -49,4 +49,3 @@ class SessionsController < ApplicationController
 			session.delete :user_email
 		end
 end
-

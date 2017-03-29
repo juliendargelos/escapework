@@ -20,10 +20,10 @@ class UsersController < ApplicationController
 
         if @user.save
             session[:user_id] = @user.id
-            flash[:success] = 'Welcome!'
+            flash[:success] = 'Bienvenue '+@user.firstname+' !'
             redirect_to root_path
         else
-            flash[:error] = 'Your registration has failed'
+            flash[:error] = 'Impossible de vous enregistrer'
             render :new
         end
     end
@@ -33,10 +33,10 @@ class UsersController < ApplicationController
 
     def update
         if @user.update user_params
-            flash[:success] = 'Your informations have been saved'
+            flash[:success] = 'Vos informations ont bien été enregistrées'
             redirect_to edit_user_path
         else
-            flash[:error] = 'Your changes have failed'
+            flash[:error] = 'Impossible d\'enregistrer vos informations'
             render :edit
         end
     end
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
         @user.destroy
         session.delete :user_id
 
-        flash[:success] = 'Your account has been deleted'
+        flash[:notice] = 'Votre compte a bien été supprimé'
         redirect_to root_path
     end
 
