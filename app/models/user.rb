@@ -7,7 +7,7 @@
 #  password_digest :string           not null
 #  firstname       :string           not null
 #  lastname        :string           not null
-#  admin           :boolean          default(FALSE), not null
+#  status          :integer          default("student"), not null
 #
 
 class User < ApplicationRecord

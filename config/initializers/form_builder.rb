@@ -106,7 +106,7 @@ class ActionView::Helpers::FormBuilder
 		if options_tags.nil?
 			if @object.class.defined_enums.key?(method.to_s)
 				options_tags = @object.class.send(method.to_s.pluralize(2)).map do |k, v|
-					[k.humanize, k]
+					[I18n.t(:"activerecord.attributes.#{@object.class.to_s.underscore}.enum_#{method.to_s}.#{k.to_s}", default: k.humanize), k]
 				end
 
 				options[:selected] = @object.send(method) unless options.key? :selected
