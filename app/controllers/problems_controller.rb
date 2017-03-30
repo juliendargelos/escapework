@@ -6,7 +6,7 @@ class ProblemsController < ApplicationController
     before_action :set_problem, only: [:show, :edit, :update, :destroy]
 
     def show
-        if current_user.participates_to?(@problem) || current_user.teacher?
+        if current_user.participates_to?(@problem.workshop) || current_user.teacher?
             @answer = Answer.for @problem, current_user
         else
             flash[:error] = 'Vous ne participez pas à ce workshop'
