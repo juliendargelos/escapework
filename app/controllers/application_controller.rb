@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
     rescue_from ActionController::UnknownController, with: :not_found
     rescue_from ActionController::RoutingError, with: :not_found
 
-    before_action :root_redirection
+    # before_action :root_redirection
 
     private
         def root_redirection
