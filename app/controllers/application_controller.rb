@@ -6,18 +6,97 @@ class ApplicationController < ActionController::Base
     rescue_from ActionController::RoutingError, with: :not_found
 
     private
-        def authorize message = nil, type = :notice
-            unless current_user?
-                flash[type] = message unless message.nil?
+        def is_current_user? users = [], options = {}
+            if users.is_a?(Hash)
+                options = users
+                users = []
+            elsif !users.is_a?(Array)
+                users = [users]
+            end
+
+            users << @user if users.length == 0
+
+            valid_users = true
+            users.each do |user|
+                unless user.is_a? User
+                    valid_users = false
+                    break
+                end
+            end
+
+            return false unless valid_users
+
+            if current_user?
+                and_ = options.key?(:and) ? options[:and] : []
+                and_ = [and_] unless and_.is_a? Array
+                and_ = [true] if and_.length == 0
+                and_condition = false
+                and_.each { |c| and_condition = and_condition || (c.is_a?(Symbol) || c.is_a?(String) ? current_user.send(:"#{c.to_s}?") : c) }
+
+                or_ = options.key?(:or) ? options[:or] : []
+                or_ = [or_] unless or_.is_a? Array
+                or_ = [false] if or_.length == 0
+                or_condition = false
+                or_.each { |c| or_condition = or_condition || (c.is_a?(Symbol) || c.is_a?(String) ? current_user.send(:"#{c.to_s}?") : c) }
+
+                authorized_user = false
+                users.each do |user|
+                    if user.id == current_user.id
+                        authorized_user = true
+                        break
+                    end
+                end
+
+                authorized_user && and_condition || or_condition
+            else
+                false
+            end
+        end
+        helper_method :is_current_user?
+
+        def authorize options = nil, message = nil, destination = nil, type = :notice
+            options = {} unless options.is_a? Hash
+            only = options.key?(:only) ? options[:only] : []
+            only = [only] unless only.is_a? Array
+
+            users = []
+            current_pushed = false
+            o = []
+            only.each do |u|
+                if u.is_a?(User) || u == :current
+                    if u == :current
+                        unless current_pushed
+                            users << @user if @user.is_a? User
+                            current_pushed = true
+                        end
+                    else
+                        users << u
+                    end
+                else
+                    o << u
+                end
+            end
+            only = o
+
+            unless users.length != 0 ? is_current_user?(users, or: only) : current_user?(is: only)
+                flash[type] = message unless message == nil
+                set_destination destination unless destination == nil
+
                 redirect_to create_session_path
+                false
             else
                 true
             end
         end
 
-		def unauthorize message = nil, type = :notice
-            if current_user?
-                flash[type] = message unless message.nil?
+        def unauthorize options = nil, message = nil, destination = nil, type = :notice
+            options = {} unless options.is_a? Hash
+            only = options.key?(:only) ? options[:only] : []
+
+            if current_user? is: only
+                flash[type] = message unless message == nil
+                session[:destination] = destination unless destination == nil
+
                 redirect_to root_path
                 false
             else
@@ -38,19 +117,30 @@ class ApplicationController < ActionController::Base
         end
         helper_method :current_user
 
+        def current_team_in workshop
+            if workshop.is_a?(Workshop) && current_user?
+                current_team = nil
+                current_user.participations.each do |participation|
+                    if participation.workshop_id == workshop.id
+                        current_team = participation.team
+                        break
+                    end
+                end
+
+                current_team
+            else
+                nil
+            end
+        end
+
+        def current_team_in? workshop
+            current_team_in(workshop) ? true : false
+        end
+
 		def current_user?
 			current_user ? true : false
 		end
 		helper_method :current_user?
-
-        def is_current_user? user
-            if current_user
-                user.id == current_user.id
-			else
-				false
-            end
-        end
-        helper_method :is_current_user?
 
         def controller_is? *options
     		options.flatten!
@@ -82,4 +172,3 @@ class ApplicationController < ActionController::Base
             render 'errors/http.html.erb'
         end
 end
-

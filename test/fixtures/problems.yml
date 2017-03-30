@@ -1,0 +1,23 @@
+# == Schema Information
+#
+# Table name: problems
+#
+#  id          :integer          not null, primary key
+#  workshop_id :integer          not null
+#  solution    :string           not null
+#  kind        :integer          default(1), not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  workshop: one
+  solution: MyString
+  kind: 1
+
+two:
+  workshop: two
+  solution: MyString
+  kind: 1

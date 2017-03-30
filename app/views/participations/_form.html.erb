@@ -1,0 +1,8 @@
+<%= form_for participation, url: actions_is?(:new, :create) ? create_participation_path : update_participation_path(participation) do |f| %>
+    <%= f.field :user_id, input: :number %>
+    <%= f.field :team_id, input: :number %>
+
+    <div class="actions">
+        <%= f.submit %>
+    </div>
+<% end %>

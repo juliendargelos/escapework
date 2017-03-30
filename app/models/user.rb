@@ -3,19 +3,26 @@
 # Table name: users
 #
 #  id              :integer          not null, primary key
-#  email           :string
-#  password_digest :string
-#  firstname       :string
-#  lastname        :string
-#  admin           :boolean
+#  email           :string           not null
+#  password_digest :string           not null
+#  firstname       :string           not null
+#  lastname        :string           not null
+#  admin           :boolean          default(FALSE), not null
 #
 
 class User < ApplicationRecord
+	has_many :participations
+
 	has_secure_password
+
+	enum status: {
+		student: 1,
+		teacher: 2
+	}
 
 	validates :email, presence: true, email: true, uniqueness: true
 	validates :password, presence: true, confirmation: true, length: { minimum: 6 }, on: :create
 	validates :firstname, presence: true
 	validates :lastname, presence: true
-	validates :admin, boolean: true
+	validates :status, presence: true
 end
