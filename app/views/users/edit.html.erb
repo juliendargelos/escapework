@@ -2,7 +2,13 @@
 <main>
 	<div class="wrapper">
 
-		<h1> Mes informations :</h1>
+		<% if params.key?(:id) %>
+			<h1>Informations de : <%= @user.fullname %> </h1>
+		<% else %>
+			<h1>Mes informations :</h1>
+		<% end %>
+
+
 		<%= render 'form', user: @user %>
 
 	</div>
