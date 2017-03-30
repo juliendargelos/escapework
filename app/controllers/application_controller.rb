@@ -5,7 +5,18 @@ class ApplicationController < ActionController::Base
     rescue_from ActionController::UnknownController, with: :not_found
     rescue_from ActionController::RoutingError, with: :not_found
 
+    before_action :root_redirection
+
     private
+        def root_redirection
+            if ENV.key?('ROOT_REDIRECTION')
+                redirection = ENV.fetch('ROOT_REDIRECTION').split ' '
+                if request.host == redirection[0]
+                    redirect_to 'http://'+redirection[1]+request.original_fullpath, status: 301
+                end
+            end
+        end
+
         def is_current_user? users = [], options = {}
             if users.is_a?(Hash)
                 options = users
