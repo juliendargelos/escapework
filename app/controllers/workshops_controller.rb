@@ -1,5 +1,5 @@
 class WorkshopsController < ApplicationController
-    before_action authorize
+    before_action :authorize
     before_action only: [:new, :edit, :create, :update] { authorize only: :teacher }
     before_action :set_workshop, only: [:show, :edit, :update, :destroy]
 

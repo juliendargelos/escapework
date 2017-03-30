@@ -1,5 +1,5 @@
 class ProblemsController < ApplicationController
-    before_action authorize
+    before_action :authorize
     before_action only: [:new, :edit, :create, :update, :destroy] { authorize only: :teacher }
 
     before_action :set_workshop, only: [:index, :new, :create]
@@ -57,6 +57,6 @@ class ProblemsController < ApplicationController
         end
 
         def problem_params
-            params.require(:problem).permit(:content, :solution, :kind)
+            params.require(:problem).permit(:name, :content, :solution, :kind)
         end
 end
