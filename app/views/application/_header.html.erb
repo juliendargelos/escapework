@@ -4,6 +4,9 @@
 			<%= link_to 'Escape Work', root_path, class: 'logo small' %>
 		</h2>
 		<nav>
+			<% if current_user? is: :teacher %>
+				<%= link_to 'Utilisateurs', users_path, class: 'button clear' %>
+			<% end %>
 			<% if current_user? %>
 				<%= link_to 'Workshops', workshops_path, class: 'button clear' %>
 				<%= link_to 'Mes informations', edit_user_path, class: 'button clear' %>

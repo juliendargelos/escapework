@@ -1,4 +1,4 @@
-<%= form_for user, url: action_is?(:new, :create) ? create_user_path : update_user_path do |f| %>
+<%= form_for user, url: action_is?(:new, :create) ? create_user_path : (current_user?(is: :teacher) ? update_user_path(id: user.id) : update_user_path) do |f| %>
 	<div class="row">
 		<div class="col">
 			<%= f.field :email, input: :email_field %>
@@ -8,6 +8,10 @@
 		<div class="col">
     		<%= f.field :firstname, input: :text_field %>
     		<%= f.field :lastname, input: :text_field %>
+
+				<% if current_user? is: :teacher %>
+					<%= f.field :status, input: :select %>
+				<% end %>
 		</div>
 	</div>
     <div class="actions">

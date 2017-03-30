@@ -43,11 +43,13 @@ Rails.application.routes.draw do
 
     scope '/user' do
         get '/' => 'users#show_current', as: :current_user
-        get '/edit' => 'users#edit', as: :edit_user
-        patch '/edit' => 'users#update', as: :update_user
-        get '/destroy' => 'users#destroy', as: :destroy_user
+        get '(/:id)/edit' => 'users#edit', as: :edit_user
+        patch '(/:id)/edit' => 'users#update', as: :update_user
+        get '(/:id)/destroy' => 'users#destroy', as: :destroy_user
         get '/:id' => 'users#show', as: :user
     end
+
+		get '/users' => 'users#index', as: :users
 
     match '*path' => 'errors#http_404', via: :all
     # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

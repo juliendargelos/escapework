@@ -1,0 +1,23 @@
+<main>
+	<div class="wrapper">
+		<h1>Liste des utilisateurs</h1>
+
+		<table>
+
+
+			<tbody>
+				<% @users.each do |user| %>
+					<tr>
+						<td><%= user.fullname %></td>
+						<td><%= user.status %></td>
+
+						<td class="actions">
+							<%= link_to 'Editer', edit_user_path(id: user.id), class: 'button dark' %>
+							<%= link_to 'Supprimer', destroy_user_path(id: user.id), class: 'button sensible' %>
+						</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</main>
