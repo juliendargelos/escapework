@@ -31,6 +31,10 @@ class Answer < ApplicationRecord
         nil
     end
 
+    def empty?
+        self.content.blank?
+    end
+
     def right
         case self.problem.kind.to_sym
         when :number
