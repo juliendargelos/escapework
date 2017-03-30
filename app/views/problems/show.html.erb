@@ -6,7 +6,7 @@
         <% elsif @answer.right %>
             <p class="right">Réponse correcte !</p>
         <% else %>
-            <p class="wrong">Réponse incorrect</p>
+            <p class="wrong">Réponse incorrecte</p>
         <% end %>
         <p><%= @problem.content %></p>
         <%= render 'answers/form', answer: @answer %>
