@@ -16,6 +16,8 @@ class Problem < ApplicationRecord
     belongs_to :workshop
     has_many :answers
 
+    has_attached_file :image, styles: { normal: '1000x>', thumb: '100x100#' }, default_url: '/default/problem/image.svg'
+
     enum kind: {
         string: 1,
         number: 2,
@@ -26,4 +28,6 @@ class Problem < ApplicationRecord
     validates :solution, presence: true
     validates :content, presence: true
     validates :kind, presence: true
+
+    validates_attachment_content_type :image, content_type: ['image/jpeg', 'image/gif', 'image/png'], size: { in: 0..2.megabytes }
 end

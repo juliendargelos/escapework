@@ -10,6 +10,37 @@ input, select, textarea
 	font-size: 14px
 	+prefix(appearance, none)
 
+input
+	&[type="checkbox"], &[type="radio"]
+		border: 2px solid $light-grey
+		width: 15px
+		height: 15px
+		&::before
+			content: ''
+			display: none
+		&:focus
+			border-color: $brand
+		&:checked
+			background: $brand
+			border-color: $brand
+			&::before
+				display: block
+	&[type="checkbox"]
+		border-radius: 3px
+		&::before
+			content: '✓'
+			margin-top: -3px
+			color: $white
+			font-size: 14px
+	&[type="radio"]
+		border-radius: 15px
+		&::before
+			background: $white
+			width: 5px
+			height: 5px
+			margin: 3px
+			border-radius: 5px
+
 .field
 	margin-bottom: 20px
 	border: 2px solid $thin-grey
@@ -21,6 +52,11 @@ input, select, textarea
 		padding: 15px
 	input, textarea, select
 		flex-grow: 1
+	input
+		&[type="checkbox"], &[type="radio"]
+			padding: 0
+			flex-grow: 0
+			flex-shrink: 0
 	label
 		padding-right: 0
 		flex-shrink: 0

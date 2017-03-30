@@ -1,5 +1,13 @@
 <%= form_for problem, url: action_is?(:new, :create) ? create_problem_path : update_problem_path(problem) do |f| %>
     <%= f.field :name %>
+    <div class="field">
+        <%= image_tag(problem.image.url(:thumb)) %>
+        <%= f.file_field :image %>
+        <% if problem.image.exists? %>
+            <%= label_tag :delete_image, 'Supprimer l\'image'%>
+            <%= check_box_tag :delete_image %>
+        <% end %>
+    </div>
     <%= f.field :content, input: :textarea %>
     <%= f.field :solution %>
     <%= f.field :kind, input: :select %>

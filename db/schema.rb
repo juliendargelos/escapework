@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330091046) do
+ActiveRecord::Schema.define(version: 20170330153011) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,13 +35,17 @@ ActiveRecord::Schema.define(version: 20170330091046) do
   end
 
   create_table "problems", force: :cascade do |t|
-    t.integer  "workshop_id",             null: false
-    t.string   "name",                    null: false
-    t.text     "content",                 null: false
-    t.string   "solution",                null: false
-    t.integer  "kind",        default: 1, null: false
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.integer  "workshop_id",                    null: false
+    t.string   "name",                           null: false
+    t.text     "content",                        null: false
+    t.string   "solution",                       null: false
+    t.integer  "kind",               default: 1, null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
     t.index ["workshop_id"], name: "index_problems_on_workshop_id", using: :btree
   end
 
