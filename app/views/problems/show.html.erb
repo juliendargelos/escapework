@@ -13,7 +13,7 @@
         <% if @problem.image.exists? %>
             <%= image_tag @problem.image.url(:normal) %>
         <% end %>
-        <p><%= @problem.content %></p>
+        <p><%= @problem.html_content %></p>
         <%= render 'answers/form', answer: @answer %>
     </div>
 </main>

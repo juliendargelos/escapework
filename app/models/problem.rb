@@ -30,4 +30,8 @@ class Problem < ApplicationRecord
     validates :kind, presence: true
 
     validates_attachment_content_type :image, content_type: ['image/jpeg', 'image/gif', 'image/png'], size: { in: 0..2.megabytes }
+
+		def html_content
+			self.content.gsub('[', '<strong>').gsub(']', '</strong>').html_safe
+		end
 end
