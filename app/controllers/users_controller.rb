@@ -4,6 +4,8 @@ class UsersController < ApplicationController
     before_action :unauthorize, only: [:create, :new]
     before_action :set_current_user, only: [:show_current, :edit, :update, :destroy]
 		before_action only: [:index] { authorize only: :teacher }
+		before_action :allow_changes_for_teacher, only: [:edit, :update, :destroy]
+		before_action :set_self_user, only: [:edit, :update]
 
 		def index
 			@users = User.all
@@ -34,28 +36,9 @@ class UsersController < ApplicationController
     end
 
 		def edit
-			if params.key?(:id)
-				if current_user? is: :teacher
-					set_user
-				else
-					flash[:error] = 'Accès refusé'
-					redirect_to root_path
-				end
-			end
     end
 
     def update
-
-			if params.key?(:id)
-				if current_user? is: :teacher
-					set_user
-				else
-					flash[:error] = 'Accès refusé'
-					redirect_to root_path
-					return false
-				end
-			end
-
       if @user.update user_params
           flash[:success] = 'Vos informations ont bien été enregistrées'
           redirect_to edit_user_path
@@ -66,16 +49,6 @@ class UsersController < ApplicationController
     end
 
     def destroy
-			if params.key?(:id)
-				if current_user? is: :teacher
-					set_user
-				else
-					flash[:error] = 'Accès refusé'
-					redirect_to root_path
-					return false
-				end
-			end
-			
         @user.destroy
         session.delete :user_id
 
@@ -99,4 +72,20 @@ class UsersController < ApplicationController
 							params.require(:user).permit(:email, :password, :password_confirmation, :firstname, :lastname)
 						end
         end
+
+				def set_self_user
+					@self_user = current_user.id == @user.id
+				end
+
+				def allow_changes_for_teacher
+					if params.key?(:id)
+						if current_user? is: :teacher
+							set_user
+						else
+							flash[:error] = 'Accès refusé'
+							redirect_to root_path
+							return false
+						end
+					end
+				end
 end

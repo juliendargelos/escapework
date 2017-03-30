@@ -1,11 +1,11 @@
-<% title 'Mes informations' %>
+<% title @self_user ? 'Mes Informations' : 'Informations de '+@user.fullname %>
 <main>
 	<div class="wrapper">
 
-		<% if params.key?(:id) %>
-			<h1>Informations de : <%= @user.fullname %> </h1>
+		<% if @self_user %>
+			<h1>Mes informations</h1>
 		<% else %>
-			<h1>Mes informations :</h1>
+			<h1>Informations de <%= @user.fullname %> </h1>
 		<% end %>
 
 
