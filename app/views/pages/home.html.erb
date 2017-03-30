@@ -1,8 +1,11 @@
 <main>
-	<section class="cover">
+	<section class="cover<%= current_user? ? ' logged-in' : '' %>">
 		<div class="wrapper">
 			<h1 class="logo large">Escape Work</h1>
 			<p>Find your <em>own</em> key</p>
+			<% unless current_user? %>
+				<%= link_to 'S\'inscrire maintenant', new_user_path, class: :button %>
+			<% end %>
 		</div>
 	</section>
 
