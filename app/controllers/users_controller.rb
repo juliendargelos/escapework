@@ -3,13 +3,12 @@ class UsersController < ApplicationController
     before_action :authorize, only: [:show_current, :edit, :update, :destroy]
     before_action :unauthorize, only: [:create, :new]
     before_action :set_current_user, only: [:show_current, :edit, :update, :destroy]
-		before_action only: [:index] { authorize only: :teacher }
-		before_action :allow_changes_for_teacher, only: [:edit, :update, :destroy]
-		before_action :set_self_user, only: [:edit, :update]
+	before_action only: [:index] { authorize only: :teacher }
+	before_action :allow_changes_for_teacher, only: [:edit, :update, :destroy]
 
-		def index
-			@users = User.all
-		end
+	def index
+		@users = User.all
+	end
 
     def show
     end
@@ -39,13 +38,13 @@ class UsersController < ApplicationController
     end
 
     def update
-      if @user.update user_params
-          flash[:success] = 'Vos informations ont bien été enregistrées'
-          redirect_to edit_user_path
-      else
-          flash[:error] = 'Impossible d\'enregistrer vos informations'
-          render :edit
-      end
+        if @user.update user_params
+            flash[:success] = 'Vos informations ont bien été enregistrées'
+            redirect_to edit_user_path
+        else
+            flash[:error] = 'Impossible d\'enregistrer vos informations'
+            render :edit
+        end
     end
 
     def destroy
@@ -66,26 +65,21 @@ class UsersController < ApplicationController
         end
 
         def user_params
-						if current_user? is: :teacher
-							params.require(:user).permit(:email, :password, :password_confirmation, :firstname, :lastname, :status)
-						else
-							params.require(:user).permit(:email, :password, :password_confirmation, :firstname, :lastname)
-						end
+            attributes = [:email, :password, :password_confirmation, :firstname, :lastname]
+            attributes += [:status] if current_user? is: :teacher
+
+            params.require(:user).permit(*attributes)
         end
 
-				def set_self_user
-					@self_user = current_user.id == @user.id
+		def allow_changes_for_teacher
+			if params.key?(:id)
+				if current_user? is: :teacher
+					set_user
+				else
+					flash[:error] = 'Accès refusé'
+					redirect_to root_path
+					return false
 				end
-
-				def allow_changes_for_teacher
-					if params.key?(:id)
-						if current_user? is: :teacher
-							set_user
-						else
-							flash[:error] = 'Accès refusé'
-							redirect_to root_path
-							return false
-						end
-					end
-				end
+			end
+		end
 end

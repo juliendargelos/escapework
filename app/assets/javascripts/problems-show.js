@@ -6,9 +6,7 @@ var problemsShow = {
 		this.setAttribute('data-found', '');
 	},
 	init: function() {
-		for(var i = 0; i < this.clues.length; i++) {
-			this.clues[i].on('click', this.click);
-		}
+		for(var i = 0; i < this.clues.length; i++) this.clues[i].on('click', this.click);
 	}
 };
 

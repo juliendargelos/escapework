@@ -17,7 +17,9 @@
     <div class="actions">
 		<% unless action_is?(:edit, :update) %>
 			<%= link_to 'Connexion', new_session_path, class: 'button dark clear' %>
+		<% else %>
+			<%= link_to 'Supprimer le compte', destroy_user_path, class: 'button sensible' %>
 		<% end %>
-        <%= f.submit action_is?(:new, :create) ? 'Inscription' : 'Update', class: 'button brand' %>
+        <%= f.submit action_is?(:new, :create) ? 'Inscription' : 'Enregistrer', class: 'button brand' %>
     </div>
 <% end %>
