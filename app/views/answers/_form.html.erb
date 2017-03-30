@@ -1,9 +1,7 @@
-<%= form_for answer, url: actions_is?(:new, :create) ? create_answer_path : update_answer_path(answer) do |f| %>
-    <%= f.field :team_id, input: :number %>
-    <%= f.field :problem_id, input: :number %>
+<%= form_for answer, url:  update_answer_path(problem_id: answer.problem.id) do |f| %>
     <%= f.field :content %>
 
     <div class="actions">
-        <%= f.submit %>
+        <%= f.submit 'Valider', class: 'button brand' %>
     </div>
 <% end %>

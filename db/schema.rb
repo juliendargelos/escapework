@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20170330091046) do
   create_table "answers", force: :cascade do |t|
     t.integer  "user_id",    null: false
     t.integer  "problem_id", null: false
-    t.string   "content",    null: false
+    t.string   "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["problem_id"], name: "index_answers_on_problem_id", using: :btree
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20170330091046) do
 
   create_table "problems", force: :cascade do |t|
     t.integer  "workshop_id",             null: false
+    t.string   "name",                    null: false
     t.text     "content",                 null: false
     t.string   "solution",                null: false
     t.integer  "kind",        default: 1, null: false

@@ -25,4 +25,16 @@ class User < ApplicationRecord
 	validates :firstname, presence: true
 	validates :lastname, presence: true
 	validates :status, presence: true
+
+	def fullname
+		self.firstname+' '+self.lastname
+	end
+
+	def participates_to? workshop
+		if workshop.is_a? Workshop
+			Participation.find_by(user: self, workshop: workshop) != nil
+		else
+			false
+		end
+	end
 end

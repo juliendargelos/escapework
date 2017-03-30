@@ -19,12 +19,17 @@ input, select, textarea
 	flex-wrap: wrap
 	label, input, textarea, select
 		padding: 15px
+	input, textarea, select
+		flex-grow: 1
 	label
 		padding-right: 0
 		flex-shrink: 0
 		color: $dark-grey
-	input, textarea, select
-		flex-grow: 1
+		+ textarea
+			width: 100%
+			padding-top: 0
+			padding-left: 15px
+			flex-shrink: 0
 	.error
 		width: 100%
 		padding: 0 15px 15px 15px

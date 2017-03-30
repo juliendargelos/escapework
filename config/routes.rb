@@ -5,7 +5,7 @@ Rails.application.routes.draw do
         get '/' => 'workshops#index', as: :workshops
         get '/new' => 'workshops#new', as: :new_workshop
         post '/new' => 'workshops#create', as: :create_workshop
-        get '/:id' => 'worhsops#show', as: :workshop
+        get '/:id' => 'workshops#show', as: :workshop
         get '/:id/edit' => 'workshops#edit', as: :edit_workshop
         patch '/:id/edit' => 'workshops#update', as: :update_workshop
         get '/:id/destroy' => 'workshops#destroy', as: :destroy_workshop
@@ -18,8 +18,8 @@ Rails.application.routes.draw do
 
         scope '/:workshop_id/problems' do
             get '/' => 'problems#index', as: :problems
-            get '/new' => 'groups#new', as: :new_group
-            post '/new' => 'groups#create', as: :create_group
+            get '/new' => 'problems#new', as: :new_problem
+            post '/new' => 'problems#create', as: :create_problem
         end
     end
 

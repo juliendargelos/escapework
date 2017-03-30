@@ -1,8 +1,8 @@
-<%= form_for participation, url: actions_is?(:new, :create) ? create_participation_path : update_participation_path(participation) do |f| %>
-    <%= f.field :user_id, input: :number %>
-    <%= f.field :team_id, input: :number %>
+<%= form_for participation, url: create_participation_path(workshop_id: participation.workshop.id) do |f| %>
+    <%= f.field :user_id, input: :select, params: [[['Choisissez un utilisateur', '']]+@users.collect{ |u| [u.fullname, u.id] }, {disabled: '', selected: ''}] %>
 
     <div class="actions">
-        <%= f.submit %>
+        <%= link_to 'Retour', workshop_path(participation.workshop), class: 'button dark clear' %>
+        <%= f.submit 'Ajouter', class: 'button brand' %>
     </div>
 <% end %>

@@ -1,6 +1,7 @@
-<h1>Editing Problem</h1>
+<main>
+	<div class="wrapper">
+		<h1>Modifier le problème "<%= @problem.name %>"</h1>
 
-<%= render 'form', problem: @problem %>
-
-<%= link_to 'Show', @problem %> |
-<%= link_to 'Back', problems_path %>
+		<%= render 'form', problem: @problem %>
+	</div>
+</main>

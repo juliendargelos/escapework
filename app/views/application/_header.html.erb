@@ -5,8 +5,9 @@
 		</h2>
 		<nav>
 			<% if current_user? %>
+				<%= link_to 'Workshops', workshops_path, class: 'button clear' %>
 				<%= link_to 'Déconnexion', destroy_session_path, class: 'button clear' %>
-				<%= link_to 'Mes informations', edit_user_path, class: 'button' %>
+				<%= link_to 'Mes informations', edit_user_path, class: 'button clear' %>
 			<% else %>
 				<%= link_to 'Connexion', new_session_path, class: 'button clear' %>
 				<%= link_to 'Inscription', new_user_path, class: 'button' %>

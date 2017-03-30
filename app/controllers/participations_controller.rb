@@ -5,10 +5,8 @@ class ParticipationsController < ApplicationController
 
     def index
         @participations = @workshop.participations
-    end
-
-    def new
         @participation = Participation.new workshop: @workshop
+        @users = User.all
     end
 
     def create

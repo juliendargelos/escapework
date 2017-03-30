@@ -1,9 +1,38 @@
-<p id="notice"><%= notice %></p>
+<main>
+    <div class="wrapper">
+        <h1><%= @workshop.name %></h1>
 
-<p>
-  <strong>Name:</strong>
-  <%= @workshop.name %>
-</p>
-
-<%= link_to 'Edit', edit_workshop_path(@workshop) %> |
-<%= link_to 'Back', workshops_path %>
+        <table>
+            <tbody>
+                <% @workshop.problems.each do |problem| %>
+                    <tr>
+                        <td>
+                            <%= link_to problem.name, problem_path(problem) %>
+                        </td>
+                        <% if current_user? is: :teacher %>
+                            <td class="actions">
+                                <%= link_to 'Modifier', edit_problem_path(problem), class: 'button dark' %>
+                                <%= link_to 'Supprimer', edit_problem_path(problem), class: 'button sensible' %>
+                            </td>
+                        <% end %>
+                    </tr>
+                <% end %>
+            </tbody>
+            <% if current_user? is: :teacher %>
+                <tfoot>
+                    <tr>
+                        <td class="actions" colspan="2">
+                            <%= link_to 'Retour', workshops_path, class: 'button dark clear' %>
+                            <% if current_user? is: :teacher %>
+                                <%= link_to @workshop.participants+' participation'+(@workshop.plural_participants? ? 's' : ''), participations_path(workshop_id: @workshop.id), class: 'button brand' %>
+                            <% end %>
+                            <% if current_user? is: :teacher %>
+                                <%= link_to 'Nouveau problème', new_problem_path(workshop_id: @workshop.id), class: 'button brand' %>
+                            <% end %>
+                        </td>
+                    </tr>
+                </tfoot>
+            <% end %>
+        </table>
+    </div>
+</main>

@@ -1,9 +1,11 @@
 <%= form_for problem, url: action_is?(:new, :create) ? create_problem_path : update_problem_path(problem) do |f| %>
-    <%= f.field :workshop_id, input: :number %>
+    <%= f.field :name %>
+    <%= f.field :content, input: :textarea %>
     <%= f.field :solution %>
-    <%= f.field :kind, input: :number %>
+    <%= f.field :kind %>
 
     <div class="actions">
-        <%= f.submit %>
+        <%= link_to 'Retour', workshop_path(problem.workshop), class: 'button dark clear' %>
+        <%= f.submit 'Enregistrer', class: 'button brand' %>
     </div>
 <% end %>

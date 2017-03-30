@@ -61,7 +61,23 @@ class ActionView::Helpers::FormBuilder
 		data[:filled] = '' unless data.key?(:filled) || options[:value].blank?
 
 		text_label = options[:label]
-		input = options[:input].blank? ? false : options[:input]
+		if options.key? :input
+			input = options[:input].blank? ? false : options[:input]
+
+			unless input == false
+				lazy_inputs = {
+					text: :text_field,
+					file: :file_field,
+					number: :number_field,
+					textarea: :text_area
+				}
+
+				input = lazy_inputs[input] if lazy_inputs.key? input
+			end
+		else
+			input = :text_field
+		end
+
 		error = @object ? options[:error_message] != true : false
 		classname = 'field'+(options[:class].blank? ? '' : ' '+options[:class].to_s)
 
@@ -69,6 +85,7 @@ class ActionView::Helpers::FormBuilder
 			params = options[:params]
 		else
 			params = [options.except(:class, :error, :filled, :label, :input, :error_message)]
+			params.unshift nil if input == :select
 		end
 
 		content_tag :div, class: classname, data: data do
@@ -82,6 +99,33 @@ class ActionView::Helpers::FormBuilder
 			concat send(input, method, *params) if input
 			concat error_tag(method) if error
 		end
+	end
+
+	alias_method :base_select, :select
+	def select method, options_tags = nil, options = {}, html_options = {}
+		if options_tags.nil?
+			if @object.class.defined_enums.key?(method.to_s)
+				options_tags = @object.class.send(method.to_s.pluralize(2)).map do |k, v|
+					[k.humanize, k]
+				end
+
+				options[:selected] = @object.send(method) unless options.key? :selected
+			else
+				method_s = method.to_s.singularize
+				method_ids = (method_s+'_ids').to_sym
+				if @object.methods.include? method_ids
+					method = method_ids
+					options_tags = method_s.camelize.constantize.all.map do |record|
+						[record.to_s, record.id]
+					end
+
+					options[:selected] = @object.send method
+					html_options[:multiple] = true
+				end
+			end
+		end
+
+		base_select method, options_tags, options, html_options
 	end
 
 	def error method, &block

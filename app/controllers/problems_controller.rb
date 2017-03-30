@@ -2,14 +2,16 @@ class ProblemsController < ApplicationController
     before_action :authorize
     before_action only: [:new, :edit, :create, :update, :destroy] { authorize only: :teacher }
 
-    before_action :set_workshop, only: [:index, :new, :create]
+    before_action :set_workshop, only: [:new, :create]
     before_action :set_problem, only: [:show, :edit, :update, :destroy]
 
-    def index
-        @problems = @workshop.problems
-    end
-
     def show
+        if current_user.participates_to?(@problem) || current_user.teacher?
+            @answer = Answer.for @problem, current_user
+        else
+            flash[:error] = 'Vous ne participez pas à ce workshop'
+            redirect_to workshops_path
+        end
     end
 
     def new
@@ -24,7 +26,7 @@ class ProblemsController < ApplicationController
 
         if @problem.save
             flash[:success] = 'Le problème a bien été enregistré'
-            redirect_to problems_path(workshop_id: @workshop.id)
+            redirect_to workshop_path(@workshop)
         else
             flash[:error] = 'Impossible d\'enregistrer le problème'
             render :new
@@ -44,7 +46,7 @@ class ProblemsController < ApplicationController
     def destroy
         @problem.destroy
         flash[:notice] = 'Le problème a bien été supprimé'
-        redirect_to problems_path(workshop_id: @problem.workshop.id)
+        redirect_to workshop_path(@workshop)
     end
 
     private

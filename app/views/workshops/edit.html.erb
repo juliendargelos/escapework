@@ -1,6 +1,7 @@
-<h1>Editing Workshop</h1>
+<main>
+	<div class="wrapper">
+		<h1>Modifier le workshop "<%= @workshop.name %>"</h1>
 
-<%= render 'form', workshop: @workshop %>
-
-<%= link_to 'Show', @workshop %> |
-<%= link_to 'Back', workshops_path %>
+		<%= render 'form', workshop: @workshop %>
+	</div>
+</main>

@@ -17,28 +17,29 @@ class Answer < ApplicationRecord
 
     validates :user, presence: true
     validates :problem, presence: true
-    validates :content, presence: true
 
     def self.for problem, user
         if problem.is_a?(Problem) && user.is_a?(User)
-            attributes = { problem: problem, user: user }
-            answer = self.find_by attributes
-            answer = self.create attributes if answer.nil?
+            if user.participates_to?(problem.workshop) || user.teacher?
+                attributes = { problem: problem, user: user }
+                answer = self.find_by attributes
+                answer = self.create attributes if answer.nil?
 
-            answer
-        else
-            nil
+                return answer
+            end
         end
+
+        nil
     end
 
     def right
-        case self.answer.kind
+        case self.problem.kind.to_sym
         when :number
-            answer.content.to_f == self.content.to_f
+            self.problem.solution.to_f == self.content.to_f
         when :string
-            answer.content == self.content
+            self.problem.solution == self.content
         when :regexp
-            answer.content.to_regexp =~ self.content
+            self.problem.solution.to_regexp =~ self.content
         else
             false
         end

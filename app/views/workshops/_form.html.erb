@@ -1,7 +1,8 @@
-<%= form_for workshop, url: actions_is?(:new, :create) ? create_workshop_path : update_workshop_path(workshop) do |f| %>
+<%= form_for workshop, url: action_is?(:new, :create) ? create_workshop_path : update_workshop_path(workshop) do |f| %>
     <%= f.field :name %>
 
     <div class="actions">
-        <%= f.submit %>
+        <%= link_to 'Retour', workshops_path, class: 'button dark clear' %>
+        <%= f.submit 'Enregistrer', class: 'button brand' %>
     </div>
 <% end %>

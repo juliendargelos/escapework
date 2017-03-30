@@ -4,10 +4,14 @@ class WorkshopsController < ApplicationController
     before_action :set_workshop, only: [:show, :edit, :update, :destroy]
 
     def index
-        @workshops = Workshop.all
+        @workshops = current_user.teacher? ? Workshop.all : current_user.participations.map { |p| p.workshop }
     end
 
     def show
+        unless current_user.participates_to?(@workshop) || current_user.teacher?
+            flash[:error] = 'Vous ne participez pas à ce workshop'
+            redirect_to workshop_path
+        end
     end
 
     def new

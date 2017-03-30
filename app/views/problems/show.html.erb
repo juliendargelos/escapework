@@ -1,19 +1,10 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Workshop:</strong>
-  <%= @problem.workshop %>
-</p>
-
-<p>
-  <strong>Solution:</strong>
-  <%= @problem.solution %>
-</p>
-
-<p>
-  <strong>Kind:</strong>
-  <%= @problem.kind %>
-</p>
-
-<%= link_to 'Edit', edit_problem_path(@problem) %> |
-<%= link_to 'Back', problems_path %>
+<main>
+    <div class="wrapper">
+        <h1><%= @problem.name %></h1>
+        <% if @answer.right %>
+            <p class="right">Réponse correcte !</p>
+        <% end %>
+        <p><%= @problem.content %></p>
+        <%= render 'answers/form', answer: @answer %>
+    </div>
+</main>
