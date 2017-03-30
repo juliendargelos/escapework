@@ -2,7 +2,7 @@
     <%= f.field :name %>
     <%= f.field :content, input: :textarea %>
     <%= f.field :solution %>
-    <%= f.field :kind %>
+    <%= f.field :kind, input: :select %>
 
     <div class="actions">
         <%= link_to 'Retour', workshop_path(problem.workshop), class: 'button dark clear' %>

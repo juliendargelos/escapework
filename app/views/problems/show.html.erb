@@ -1,8 +1,12 @@
 <main>
     <div class="wrapper">
         <h1><%= @problem.name %></h1>
-        <% if @answer.right %>
+        <% if @answer.empty? %>
+            <p class="empty">Pas de réponse fournie</p>
+        <% elsif @answer.right %>
             <p class="right">Réponse correcte !</p>
+        <% else %>
+            <p class="wrong">Réponse incorrect</p>
         <% end %>
         <p><%= @problem.content %></p>
         <%= render 'answers/form', answer: @answer %>

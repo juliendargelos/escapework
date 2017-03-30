@@ -6,7 +6,6 @@ class AnswersController < ApplicationController
         @answer = Answer.for @problem, current_user
         unless @answer.nil?
             if @answer.update answer_params
-                flash[:success] = 'La réponse a bien été enregistrée'
                 redirect_to problem_path(@problem)
             else
                 flash[:error] = 'Impossible d\'enregistrer la réponse'
