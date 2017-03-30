@@ -1,5 +1,5 @@
 class ParticipationsController < ApplicationController
-    before_action { authorize :teacher }
+    before_action { authorize only: :teacher }
     before_action :set_workshop, only: [:index, :new, :create]
     before_action :set_participation, only: [:destroy]
 

@@ -1,6 +1,6 @@
 class ProblemsController < ApplicationController
     before_action authorize
-    before_action only: [:new, :edit, :create, :update, :destroy] { authorize :teacher }
+    before_action only: [:new, :edit, :create, :update, :destroy] { authorize only: :teacher }
 
     before_action :set_workshop, only: [:index, :new, :create]
     before_action :set_problem, only: [:show, :edit, :update, :destroy]

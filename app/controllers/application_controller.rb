@@ -137,10 +137,20 @@ class ApplicationController < ActionController::Base
             current_team_in(workshop) ? true : false
         end
 
-		def current_user?
-			current_user ? true : false
-		end
-		helper_method :current_user?
+        def current_user? options = {}
+            if current_user
+                is = options.key?(:is) ? options[:is] : true
+                is = [is] unless is.is_a? Array
+                is = [true] if is.length == 0
+                condition = false
+                is.each { |c| condition = condition || (c.is_a?(Symbol) || c.is_a?(String) ? current_user.send(:"#{c.to_s}?") : c) }
+
+                condition
+            else
+                false
+            end
+        end
+        helper_method :current_user?
 
         def controller_is? *options
     		options.flatten!
