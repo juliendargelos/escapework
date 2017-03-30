@@ -1,5 +1,22 @@
 fr:
   activerecord:
     attributes:
-      answer:
-        content: Réponse
+      problem:
+        name: Nom
+        content: Énoncé
+        solution: Solution
+        kind: Type de solution
+        enum_kind:
+          string: Texte
+          number: Nombre
+          regexp: Expression rationnelle
+    errors:
+      models:
+        problem:
+          attributes:
+            solution:
+              blank: Veuillez indiquer une solution
+            content:
+              blank: Veuillez indiquer un énoncé
+            kind:
+              blank: veuillez indiquer un type de solution
