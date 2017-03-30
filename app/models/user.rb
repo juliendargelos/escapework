@@ -11,7 +11,8 @@
 #
 
 class User < ApplicationRecord
-	has_many :participations
+	has_many :answers, dependent: :destroy
+	has_many :participations, dependent: :destroy
 
 	has_secure_password
 

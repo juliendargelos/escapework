@@ -9,8 +9,8 @@
 #
 
 class Workshop < ApplicationRecord
-	has_many :problems
-	has_many :participations
+	has_many :problems, dependent: :destroy
+	has_many :participations, dependent: :destroy
 
 	validates :name, presence: true
 

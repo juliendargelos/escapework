@@ -14,7 +14,7 @@
 
 class Problem < ApplicationRecord
     belongs_to :workshop
-    has_many :answers
+    has_many :answers, dependent: :destroy
 
     has_attached_file :image, styles: { normal: '1000x>', thumb: '100x100#' }, default_url: '/default/problem/image.svg'
 
@@ -31,7 +31,7 @@ class Problem < ApplicationRecord
 
     validates_attachment_content_type :image, content_type: ['image/jpeg', 'image/gif', 'image/png'], size: { in: 0..2.megabytes }
 
-		def html_content
-			self.content.gsub('[', '<strong>').gsub(']', '</strong>').html_safe
-		end
+	def html_content
+		self.content.gsub('[', '<strong>').gsub(']', '</strong>').html_safe
+	end
 end
