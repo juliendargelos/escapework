@@ -26,7 +26,6 @@ class Problem < ApplicationRecord
 
     validates :workshop, presence: true
     validates :solution, presence: true
-    validates :content, presence: true
     validates :kind, presence: true
 
     validates_attachment_content_type :image, content_type: ['image/jpeg', 'image/gif', 'image/png'], size: { in: 0..2.megabytes }
