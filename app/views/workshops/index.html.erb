@@ -6,7 +6,7 @@
             <% @workshops.each do |workshop| %>
                 <div class="col">
                     <div class="workshop">
-                        <%= image_tag workshop.image.url(:thumb) %>
+                        <%= image_tag workshop.image.url(:medium) %>
                         <%= content_tag :a, href: workshop_path(workshop), class: 'infos'+(workshop.completed_by?(current_user) ? ' completed' : '') do %>
                             <span><%= workshop.score_for current_user %></span>
                         <% end %>
