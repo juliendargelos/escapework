@@ -7,7 +7,10 @@ fr:
         password_confirmation: Confirmation
         firstname: Prénom
         lastname: Nom de famille
-        admin: Administrateur
+        status: Statut
+        enum_status:
+            student: Étudiant
+            teacher: Professeur
     errors:
       models:
         user:
@@ -27,5 +30,5 @@ fr:
               blank: Veuillez indiquer votre prénom
             lastname:
               blank: Veuillez indiquer votre nom de famille
-            admin:
-                inclusion: Veuillez indiquer une valeur valide
+            status:
+                blank: Veuillez indiquer un statut

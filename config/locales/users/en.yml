@@ -7,7 +7,10 @@ fr:
         password_confirmation: Confirmation
         firstname: First name
         lastname: Last name
-        admin: Administrator
+        status: Status
+        enum_status:
+            student: Student
+            teacher: Peacher
     errors:
       models:
         user:
@@ -27,5 +30,5 @@ fr:
               blank: Please fill your first name
             lastname:
               blank: Please fill your last name
-            admin:
-                inclusion: Please provide a valid value
+            status:
+                blank: Please provide a status

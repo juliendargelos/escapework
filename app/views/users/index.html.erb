@@ -11,7 +11,7 @@
 				<% @users.each do |user| %>
 					<tr>
 						<td><%= user.fullname %></td>
-						<td><%= user.status %></td>
+						<td><%= t :"activerecord.attributes.user.enum_status.#{user.status}" %></td>
 
 						<td class="actions">
 							<%= link_to 'Editer', edit_user_path(id: user.id), class: 'button dark' %>
