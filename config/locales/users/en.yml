@@ -10,7 +10,7 @@ fr:
         status: Status
         enum_status:
             student: Student
-            teacher: Peacher
+            teacher: Teacher
     errors:
       models:
         user:
