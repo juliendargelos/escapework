@@ -24,7 +24,7 @@
                         <% if current_user? is: :teacher %>
                             <div class="actions">
                                 <%= link_to 'Modifier', edit_problem_path(problem), class: 'button dark' %>
-                                <%= link_to 'Supprimer', edit_problem_path(problem), class: 'button sensible' %>
+                                <%= link_to 'Supprimer', destroy_problem_path(problem), class: 'button sensible' %>
                             </div>
                         <% end %>
                     </div>
