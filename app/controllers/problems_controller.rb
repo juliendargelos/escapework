@@ -46,7 +46,7 @@ class ProblemsController < ApplicationController
     def destroy
         @problem.destroy
         flash[:notice] = 'Le problème a bien été supprimé'
-        redirect_to workshop_path(@workshop)
+        redirect_to workshop_path(@problem.workshop)
     end
 
     private
