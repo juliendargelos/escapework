@@ -1,19 +1,35 @@
 .cover
 	background: $brand asset-url('pattern.png') repeat center top
 	text-align: center
-	padding: 150px 0 100px 0
-	color: $white
 	margin-top: -$header-height - 30px
-	&.logged-in
-		padding-bottom: 150px
+	padding: 100px 0 100px 0
+	color: $white
+	.logo
+		animation: cover-logo 0.8s 1
 	h1
 		margin: 0 auto
-	p
-		margin-top: 20px
-		font-size: 12px
-		font-weight: $bold
-		letter-spacing: 1px
-		em
-			+em-color(null, transparentize($white, 0.4))
 	a
-		margin-top: 50px
+		margin-top: 30px
+		animation: cover-link 0.8s 1
+
+body > header
+	background: none
+
+@keyframes cover-logo
+	0%
+		opacity: 0
+		transform: translateY(-30px) rotateY(-270deg)
+	20%
+		opacity: 0
+		transform: translateY(-30px) rotateY(-270deg)
+	100%
+		opacity: 1
+		transform: translateY(0) rotateY(0)
+
+@keyframes cover-link
+	0%
+		opacity: 0
+	50%
+		opacity: 0
+	100%
+		opacity: 1

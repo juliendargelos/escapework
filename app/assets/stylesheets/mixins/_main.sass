@@ -1,3 +1,7 @@
+=main-overlay($alpha, $color: $white)
+	body
+		background-image: overlay($color, $alpha), asset-url('background.jpg')
+
 =default($defaults)
 	@each $n, $default in $defaults
 		@extend #{&}.#{$default}

@@ -1,10 +1,9 @@
 <main>
 	<section class="cover<%= current_user? ? ' logged-in' : '' %>">
 		<div class="wrapper">
-			<h1 class="logo large">Escape Work</h1>
-			<p>Find your <em>own</em> key</p>
+			<h1 class="logo tile large">Escape Work</h1>
 			<% unless current_user? %>
-				<%= link_to 'S\'inscrire maintenant', new_user_path, class: :button %>
+				<%= link_to 'Find your own key', new_user_path, class: :button %>
 			<% end %>
 		</div>
 	</section>
@@ -28,18 +27,27 @@
 				<div class="col">
 					<div class="field escape"></div>
 					<h3>Résolvez les énigmes pour vous échapper</h3>
+					<p>
+						Votre classe de collège est confrontée a un problème: il faut s'échapper. Les énigmes numériques de Escape&nbsp;Work vont vous rendre la tâche difficle...
+					</p>
 				</div>
 				<div class="col">
 					<div class="field problem"></div>
 					<h3>Travaillez en groupe sur des problèmes</h3>
+					<p>
+						Vous collaborez par petits groupes pour trouver des solutions, chacun exploite ses connaissances scolaires ou personnelles pour résoudre ce casse-tête.
+					</p>
 				</div>
 				<div class="col">
 					<div class="field timer"></div>
-					<h3>Mettez le temps au défi durant 1&nbsp;heure</h3>
+					<h3>Mettez le temps au défi durant 45&nbsp;min</h3>
+					<p>
+						Durant le jeu, les intervenants et le professeur vous laissent en autonomie mais restent disponibles. Ensuite, ils seront à votre écoute pour répondre à vos questions.
+					</p>
 				</div>
 			</div>
-
-			<p>Les EscapeWork sont des évènements d'une heure où des <em>groupes</em> d'élèves vont devoir faire face à un problème. Ces moments permettent d'aborder le programme scolaire en proposant une pédagogie plus <em>ludique</em> et <em>collaborative</em>.</p>
 		</div>
 	</section>
 </main>
+
+<%= svg :edge%>

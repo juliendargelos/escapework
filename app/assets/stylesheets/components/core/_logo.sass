@@ -17,6 +17,12 @@
 	&.inline
 		display: inline-block
 	+default($logo-default)
+	&.tile
+		background-image: asset-url('logo-tile.svg')
+		@each $name, $size in $logo-sizes
+			&.#{$name}
+				width: $size*$logo-ratio
+				height: $size*$logo-ratio
 	&:focus
 		outline: none
 		transform: scale(1.1)

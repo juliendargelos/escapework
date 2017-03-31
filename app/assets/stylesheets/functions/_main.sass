@@ -1,0 +1,2 @@
+@function overlay($color: $black, $alpha: 1)
+	@return linear-gradient(transparentize($color, 1 - $alpha), transparentize($color, 1 - $alpha))

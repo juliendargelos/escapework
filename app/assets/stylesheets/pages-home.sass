@@ -3,17 +3,24 @@
 @import components/cover
 @import components/rowcols
 
++main-overlay(0.95)
+
 .introduction
+	margin-top: -90px
+	+prefix(clip-path, polygon(0 0, 50% 80px, 100% 0, 100% 100%, 0 100%))
 	+cols((default: 2, medium: 1))
 	.image
-		background: asset-url('introduction.jpg') no-repeat right center / cover
+		background: $thin-grey asset-url('introduction.jpg') no-repeat right center / cover
 		min-height: 200px
+		+max(medium)
+			display: none
 	.description
 		background: $thin-grey
+		padding-top: 50px
 		p
 			width: 100%
 			max-width: map-get($wrapper-sizes, normal)/2+$wrapper-padding*2
-			padding: 80px $wrapper-padding
+			padding: 80px $wrapper-padding 60px 50px
 			box-sizing: border-box
 			font-size: 18px
 			color: $grey
@@ -21,10 +28,23 @@
 			em
 				+em-color(null, $light-grey)
 					margin-top: -6px
+		+max(medium)
+			background: asset-url('introduction.jpg') no-repeat center top / cover
+			padding-top: 0
+			p
+				+prefix(backdrop-filter, blur(20px))
+				max-width: none
+				background: transparentize($white, 0.4)
+				padding-top: 160px
+				padding-bottom: 85px
+				text-align: center
+				color: darken($brand, 10)
+				em
+					+em-color(darken($brand, 10))
 .presentation
 	padding: 80px 0
 	h2
-		margin-bottom: 60px
+		margin-bottom: 70px
 		text-align: center
 	.wrapper > p
 		margin-top: 60px
@@ -34,7 +54,8 @@
 			+em-color(null, $light-grey)
 				margin-top: -2px
 	.row
-		+cols((default: 3, medium: 1), 90px)
+		padding: 0 50px
+		+cols((default: 3, medium: 1), 60px)
 		vertical-align: top
 	.col
 		text-align: center
@@ -59,7 +80,7 @@
 			line-height: 20px
 		p
 			color: $medium-grey
-			line-height: 20px
+			line-height: 24px
 		+max(medium)
 			&:not(:last-of-type)
 				margin-bottom: 60px

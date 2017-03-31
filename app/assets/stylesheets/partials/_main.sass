@@ -7,12 +7,19 @@
 @import ../components/core/*
 
 body
+	background-repeat: no-repeat
+	background-position: center center
+	background-size: cover
 	font-family: Helvetica, Arial, sans-serif
 	font-size: 14px
 	color: $dark-grey
 
++main-overlay(0.98)
+
 main
+	min-height: calc(100vh - #{$header-height})
 	padding: 30px 0
+	box-sizing: border-box
 	a
 		text-decoration: underline
 	h1, h2
