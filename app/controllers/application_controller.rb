@@ -5,8 +5,7 @@ class ApplicationController < ActionController::Base
     rescue_from ActionController::UnknownController, with: :not_found
     rescue_from ActionController::RoutingError, with: :not_found
 
-    # before_action :root_redirection
-    before_action :set_locale
+    before_action :root_redirection
 
     private
         def root_redirection
@@ -16,10 +15,6 @@ class ApplicationController < ActionController::Base
                     redirect_to 'http://'+redirection[1]+request.original_fullpath, status: 301
                 end
             end
-        end
-
-        def set_locale
-            I18n.locale = :fr
         end
 
         def is_current_user? users = [], options = {}
