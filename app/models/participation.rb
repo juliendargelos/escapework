@@ -15,4 +15,10 @@ class Participation < ApplicationRecord
 
     validates :user, presence: true
     validates :workshop, presence: true
+
+    def exists?
+        participation = self.class.find_by user: self.user, workshop: self.workshop
+
+        participation.nil? ? false : participation.id != self.id
+    end
 end

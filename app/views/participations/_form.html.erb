@@ -1,4 +1,5 @@
 <%= form_for participation, url: create_participation_path(workshop_id: participation.workshop.id) do |f| %>
+    <%= f.hidden_field :id, value: 'none' %>
     <%= f.field :user_id, input: :select, params: [[['Choisissez un utilisateur', '']]+@users.collect{ |u| [u.fullname, u.id] }, {disabled: '', selected: ''}] %>
 
     <div class="actions">

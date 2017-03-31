@@ -12,13 +12,17 @@ class ParticipationsController < ApplicationController
     def create
         @participation = Participation.new participation_params.merge(workshop: @workshop)
 
-        if @participation.save
-            flash[:success] = 'La participation a bien été ajoutée'
-            redirect_to participations_path(workshop_id: @workshop.id)
+        unless @participation.exists?
+            if @participation.save
+                flash[:success] = 'La participation a bien été ajoutée'
+            else
+                flash[:error] = 'Veuillez indiquer un utilisateur à ajouter'
+            end
         else
-            flash[:error] = 'Impossible d\'ajouter la participation'
-            render :new
+            flash[:error] = 'Cet utilisateur participe déjà au workshop'
         end
+
+        redirect_to participations_path(workshop_id: @workshop.id)
     end
 
     def destroy
