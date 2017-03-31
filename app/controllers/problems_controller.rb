@@ -59,7 +59,7 @@ class ProblemsController < ApplicationController
         end
 
         def problem_params
-            problem_params = params.require(:problem).permit(:name, :content, :solution, :kind, :image)
+            problem_params = params.require(:problem).permit(:name, :content, :solution, :kind, :image, :category)
             problem_params[:image] = nil if params[:delete_image] == '1'
 
             problem_params

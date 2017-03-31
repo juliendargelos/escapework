@@ -1,0 +1,61 @@
+@import partials/main
+@import components/cover
+@import components/rowcols
+
+.cover
+	background-position: center center
+	background-size: cover
+	background-repeat: no-repeat
+	padding: 0
+	+prefix(clip-path, polygon(0 0, 100% 0, 100% calc(100% - 80px), 50% 100%, 0 calc(100% - 80px)))
+	.overlay
+		background: transparentize($brand, 0.5)
+		padding: 150px 0
+
+.problems
+	margin: 50px 0
+	+cols((default: 2, medium: 1))
+		perspective: 1000px
+	.problem
+		transition: 0.2s
+		.infos
+			display: flex
+			text-decoration: none
+			align-items: center
+			border-radius: 50px
+			transition: 0.2s
+			&:hover
+				background: $thin-grey
+		.category
+			background-color: $brand
+			background-repeat: no-repeat
+			background-position: center center
+			background-size: auto 25px
+			height: 50px
+			width: 50px
+			margin-right: 20px
+			border-radius: 50px
+			flex-shrink: 0
+			flex-grow: 0
+			&.image
+				background-image: asset-url('problem-image.svg')
+			&.puzzle
+				background-image: asset-url('problem-puzzle.svg')
+			&.story
+				background-image: asset-url('problem-story.svg')
+		.solved
+			background: $green
+			margin-left: 10px
+			padding: 7px 9px 6px 9px
+			border-radius: 20px
+			display: inline-block
+			font-size: 9px
+			font-weight: $bold
+			color: $white
+			text-transform: uppercase
+			letter-spacing: 1px
+		.actions
+			margin-top: 10px
+		&:hover
+			transform: rotateX(-5deg) rotateY(5deg)
+			transition: 0.1s

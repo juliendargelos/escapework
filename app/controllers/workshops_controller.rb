@@ -55,6 +55,9 @@ class WorkshopsController < ApplicationController
         end
 
         def workshop_params
-            params.require(:workshop).permit(:name)
+            workshop_params = params.require(:workshop).permit(:name)
+            workshop_params[:image] = nil if params[:delete_image] == '1'
+
+            workshop_params
         end
 end

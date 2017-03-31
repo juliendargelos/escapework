@@ -6,6 +6,7 @@ en:
         content: Content
         solution: Solution
         kind: Solution type
+        category: Category
         enum_kind:
           string: Text
           number: Number

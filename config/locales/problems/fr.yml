@@ -6,6 +6,7 @@ fr:
         content: Énoncé
         solution: Solution
         kind: Type de solution
+        category: Catégorie
         enum_kind:
           string: Texte
           number: Nombre

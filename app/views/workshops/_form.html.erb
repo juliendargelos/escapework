@@ -1,5 +1,13 @@
 <%= form_for workshop, url: action_is?(:new, :create) ? create_workshop_path : update_workshop_path(workshop) do |f| %>
     <%= f.field :name %>
+    <div class="field">
+        <%= image_tag(workshop.image.url(:thumb)) %>
+        <%= f.file_field :image %>
+        <% if workshop.image.exists? %>
+            <%= label_tag :delete_image, 'Supprimer l\'image'%>
+            <%= check_box_tag :delete_image %>
+        <% end %>
+    </div>
 
     <div class="actions">
         <%= link_to 'Retour', workshops_path, class: 'button dark clear' %>

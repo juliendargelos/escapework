@@ -1,12 +1,26 @@
 <% title @problem.name %>
 
 <main>
+    <div class="cover" style="background-image: url(<%= @problem.workshop.image.url(:normal) %>)">
+        <div class="overlay">
+            <div class="wrapper">
+                <h1><%= link_to @problem.workshop.name, workshop_path(@problem.workshop) %></h1>
+                <div class="problem">
+                    <div class="category <%= @problem.category %>"></div>
+                    <span class="name"><%= @problem.name %></span>
+                    <% if @problem.solved_by? current_user %>
+                        <span class="solved">Résolu</span>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="wrapper">
-        <h1><%= @problem.name %></h1>
         <% if @answer.empty? %>
             <p class="empty">Pas de réponse fournie</p>
         <% elsif @answer.right %>
-            <p class="right">Réponse correcte !</p>
+            <p class="right">Well done&nbsp;!</p>
         <% else %>
             <p class="wrong">Réponse incorrecte</p>
         <% end %>

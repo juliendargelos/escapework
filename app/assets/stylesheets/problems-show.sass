@@ -1,0 +1,96 @@
+@import partials/main
+@import components/form
+@import components/cover
+
+.cover
+	background-position: center center
+	background-size: cover
+	background-repeat: no-repeat
+	padding: 0
+	margin-bottom: 50px
+	+prefix(clip-path, polygon(0 0, 100% 0, 100% calc(100% - 80px), 50% 100%, 0 calc(100% - 80px)))
+	.overlay
+		background: transparentize($brand, 0.5)
+		padding: 150px 0
+	h1
+		a
+			color: $white
+			padding: 3px 10px 3px 12px
+			border-radius: 100px
+			text-decoration: none
+			display: inline-block
+			transition: 0.2s
+			&:hover
+				background: $white
+				color: $brand
+				transform: scale(0.9)
+	.problem
+		margin-top: 20px
+		display: flex
+		align-items: center
+		justify-content: center
+		.category
+			background-color: $white
+			background-repeat: no-repeat
+			background-position: center center
+			background-size: auto 25px
+			height: 50px
+			width: 50px
+			margin-right: 20px
+			border-radius: 50px
+			flex-shrink: 0
+			flex-grow: 0
+			&.image
+				background-image: asset-url('problem-image-brand.svg')
+			&.puzzle
+				background-image: asset-url('problem-puzzle-brand.svg')
+			&.story
+				background-image: asset-url('problem-story-brand.svg')
+		.solved
+			background: $green
+			margin-left: 10px
+			padding: 7px 9px 6px 9px
+			border-radius: 20px
+			display: inline-block
+			font-size: 9px
+			font-weight: $bold
+			color: $white
+			text-transform: uppercase
+			letter-spacing: 1px
+
+.empty, .right, .wrong
+	padding: 15px
+	border-radius: 100px
+	text-align: center
+	color: $white
+
+.empty
+	background: $light-grey
+.right
+	background: $green
+.wrong
+	background: $red
+
+p
+	margin-bottom: 30px
+
+img
+	margin: 0 auto 30px auto
+	max-width: 100%
+	height: auto
+	display: block
+
+.content
+	cursor: default
+	line-height: 24px
+	font-size: 20px
+	color: $grey
+	strong
+		padding: 3px 0
+		border-radius: 20px
+		cursor: help
+		display: inline-block
+		&[data-found]
+			padding: 3px 6px
+			background: $brand
+			color: $white
